@@ -1,5 +1,7 @@
 package com.example.mywork_zty;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -7,6 +9,12 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +31,10 @@ public class WechatFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerView;
+    private RecycleAdapterDome adapterDome;
+    private Activity context;
+    private List<String> list;
 
     public WechatFragment() {
         // Required empty public constructor
@@ -58,7 +70,23 @@ public class WechatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        context = this.getActivity();
+        recyclerView = view.findViewById(R.id.recyclerview);
+        list = new ArrayList<>();
+
+        for (int i = 0; i < 20; i++) {
+            list.add("这是第" + i + "行文字");
+        }
+        adapterDome = new RecycleAdapterDome(list, context);
+        LinearLayoutManager manager = new LinearLayoutManager(context);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapterDome);
+        return view;
     }
-}
+
+    // Inflate the layout for this fragment
+
+    }
