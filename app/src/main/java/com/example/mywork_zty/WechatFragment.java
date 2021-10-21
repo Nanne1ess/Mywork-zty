@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,11 +76,20 @@ public class WechatFragment extends Fragment {
         context = this.getActivity();
         recyclerView = view.findViewById(R.id.recyclerview);
         list = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            list.add("这是第" + i + "行文字");
+        String[] label={"品牌：华为","品牌：苹果","品牌：小米"};
+        String[] price={"价格：6888","价格：5999","价格：3999"};
+        String[] config={"容量：128G","容量：256G","容量：512G"};
+        int[] png={R.drawable.huawei,R.drawable.apple,R.drawable.xiaomi};
+        List<Map<String,Object>> data=new ArrayList<Map<String,Object>>();
+        for(int i=0;i< label.length;i++) {
+            Map<String, Object> listitem = new HashMap<String, Object>();
+            listitem.put("imageView",png[i]);
+            listitem.put("name", label[i]);
+            listitem.put("price", price[i]);
+            listitem.put("configure", config[i]);
+            data.add(listitem);
         }
-        adapterDome = new RecycleAdapterDome(list, context);
+        adapterDome = new RecycleAdapterDome(data, context);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
 

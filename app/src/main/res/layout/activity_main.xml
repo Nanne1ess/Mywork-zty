@@ -12,6 +12,20 @@
         layout="@layout/top"
         />
 
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        tools:ignore="MissingClass">
+
+    <com.scwang.smartrefresh.layout.header.BezierRadarHeader
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlHeaderHeight="150dp"
+        app:srlHeaderMaxDragRate="1"/>
+
     <FrameLayout
         android:id="@+id/id_content"
         android:layout_width="match_parent"
@@ -19,6 +33,12 @@
         android:layout_weight="1">
 
     </FrameLayout>
+    <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+        srlClassicsSpinnerStyle="Translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <include
         layout="@layout/bottom"
