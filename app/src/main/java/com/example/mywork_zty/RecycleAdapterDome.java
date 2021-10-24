@@ -2,6 +2,7 @@ package com.example.mywork_zty;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,24 @@ public class RecycleAdapterDome extends RecyclerView.Adapter<RecycleAdapterDome.
         holder.textView2.setText(data.get(position).get("price").toString());
         holder.textView3.setText(data.get(position).get("configure").toString());
         holder.imageView.setImageResource((Integer) data.get(position).get("imageView"));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.textView1.getText() == "品牌：华为"){
+                    Intent intent=new Intent(context,MainActivity4.class);
+                    context.startActivity(intent);
+                }
+                if(holder.textView1.getText() == "品牌：苹果"){
+                    Intent intent=new Intent(context,MainActivity5.class);
+                    context.startActivity(intent);
+                }
+                if(holder.textView1.getText() == "品牌：小米"){
+                    Intent intent=new Intent(context,MainActivity6.class);
+                    context.startActivity(intent);
+                }
+
+            }
+        });
     }
     @Override
     public int getItemCount() {

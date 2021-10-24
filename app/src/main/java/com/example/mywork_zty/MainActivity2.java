@@ -5,8 +5,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.View;
@@ -14,6 +18,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
+
+    private MyService2.Mybinder mybinder;
 
     @Override
     protected void onPostResume() {
@@ -76,8 +82,13 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         Log.d("life","activity2 is onCreate....");
-        Button button=findViewById(R.id.button2);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button button2=findViewById(R.id.button2);
+        Button button1=findViewById(R.id.button1);
+        Button button3=findViewById(R.id.button3);
+        Button button4=findViewById(R.id.button4);
+        Button button5=findViewById(R.id.button5);
+        Button button6=findViewById(R.id.button6);
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent main2=new Intent(MainActivity2.this,MainActivity3.class);
@@ -87,6 +98,67 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivityForResult(main2,1);
             }
         });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent main3=new Intent(MainActivity2.this,MyService1.class);
+                startService(main3);
+
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent main4=new Intent(MainActivity2.this,MyService1.class);
+                stopService(main4);
+            }
+        });
+
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ServiceConnection connection=new ServiceConnection() {
+                    @Override
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        MyService2.Mybinder mybinder= (MyService2.Mybinder) service;
+                        mybinder.play();
+                    }
+
+                    @Override
+                    public void onServiceDisconnected(ComponentName name) {
+                        mybinder = null;
+                    }
+                };
+                Intent main5=new Intent(MainActivity2.this,MyService2.class);
+                bindService(main5,connection, Context.BIND_AUTO_CREATE);
+            }
+        });
+
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ServiceConnection connection=new ServiceConnection() {
+                    @Override
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        MyService2.Mybinder mybinder= (MyService2.Mybinder) service;
+                        mybinder.stop();
+                    }
+
+                    @Override
+                    public void onServiceDisconnected(ComponentName name) {
+                        mybinder = null;
+                    }
+                };
+                Intent main6=new Intent(MainActivity2.this,MyService2.class);
+                bindService(main6,connection, Context.BIND_AUTO_CREATE);
+            }
+        });
+
+
+
+
     }
+
 
 }

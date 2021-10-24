@@ -10,24 +10,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Myworkzty">
         <activity
-            android:name=".MainActivity3"
-            android:exported="true">
+            android:name=".MainActivity6"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity5"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity4"
+            android:exported="true" />
 
-        </activity>
+        <service
+            android:name=".MyService2"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyService1"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity
+            android:name=".MainActivity3"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity2"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>/>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
